@@ -1,0 +1,121 @@
+[
+    {
+        "name": "Profile",
+        "type": "record",
+        "doc": "User account",
+        "fields": [
+            {"name": "id", "type": "string", "default_function":"uuid4"},
+            {"name": "name", "type": "string"},
+            {"name": "wins", "type": "long", "default": 0},
+            {"name": "losses", "type": "long", "default": 0}
+        ],
+        "indexes": ["id"]
+    },
+    {
+        "type": "enum",
+        "name": "WhoWon",
+        "symbols": ["Citizens", "Mafia"]
+    },
+    {
+        "name": "Game",
+        "type": "record",
+        "doc": "User account",
+        "fields": [
+            {"name": "id", "type": "string", "default_function":"uuid4"},
+            {"name": "participant_ids", "type": {"type": "array", "items": "string"}},
+            {"name": "mafia_ids", "type": {"type": "array", "items": "string"}},
+            {"name": "doctor_ids", "type": {"type": "array", "items": "string"}},
+            {"name": "complete", "type": "boolean", "default": false},
+            {"name": "who_won", "type": ["null", "WhoWon"]}
+        ],
+        "indexes": ["id"],
+        "relations": [
+            {"name": "rounds", "to": "Round", "count": "many",
+             "from_fields": "id", "to_fields": "game_id"}
+        ],
+        "functions": [
+            {
+                "name": "participants",
+                "type": {"type": "array", "items": "Profile"},
+                "arguments": [
+                ],
+                "ref": "game_participants"
+            },
+            {
+                "name": "mafia",
+                "type": {"type": "array", "items": "Profile"},
+                "arguments": [
+                ],
+                "ref": "game_mafia"
+            }
+        ]
+    },
+    {
+        "type": "enum",
+        "name": "RoundType",
+        "symbols": ["Night", "Day"]
+    },
+
+    {
+        "name": "Round",
+        "type": "record",
+        "doc": "Game round",
+        "fields": [
+            {"name": "game_id", "type": "string"},
+            {"name": "id", "type": "long"},
+            {"name": "round_type", "type": "RoundType"},
+            {"name": "alive_ids", "type": ["null", {"type": "array", "items": "string"}]},
+            {"name": "complete", "type": "boolean", "default": false}
+        ],
+        "indexes": [{"name": "primary", "parts": ["game_id", "id"]},
+                   "game_id"],
+        "affinity": ["game_id"],
+        "relations": [
+        ],
+        "functions": [
+            {
+                "name": "alive",
+                "type": {"type": "array", "items": "Profile"},
+                "arguments": [
+                ],
+                "ref": "round_get_alive"
+            }
+        ]
+    },
+    {
+        "type": "enum",
+        "name": "VoteType",
+        "symbols": ["Kill", "Heal"]
+    },
+    {
+        "name": "Vote",
+        "type": "record",
+        "doc": "Vote within a round",
+        "fields": [
+            {"name": "game_id", "type": "string"},
+            {"name": "round_id", "type": "long"},
+            {"name": "user_id", "type": "string"},
+            {"name": "target_id", "type": "string"},
+            {"name": "action", "type": "VoteType"}
+        ],
+        "indexes": [{"name": "primary", "parts": ["game_id", "round_id", "user_id"]}],
+        "affinity": ["game_id"],
+        "relations": [
+        ]
+    },
+    {
+        "name": "Chat",
+        "type": "record",
+        "doc": "Chat message",
+        "fields": [
+            {"name": "game_id", "type": "string"},
+            {"name": "id", "type": "long"},
+            {"name": "user_id", "type": "long"},
+            {"name": "message", "type": "string"}
+        ],
+        "indexes": [{"name": "primary", "parts": ["game_id", "id"]}],
+        "affinity": ["game_id"],
+        "relations": [
+        ]
+    }
+]

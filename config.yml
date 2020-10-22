@@ -1,0 +1,41 @@
+---
+types:
+  __file: model.avsc
+
+services:
+  get_alive:
+    doc: "Get alive people in the game"
+    function: game_get_alive
+    return_type: {"type": "array", "items": "Profile"}
+    args:
+      id: long
+
+
+  calculate_round:
+    doc: "Calculate the result of the round"
+    function: game_calculate_round
+    return_type: ["null", {"type": "array", "items": "string"}]
+    args:
+      id: string
+
+
+  end_round:
+    doc: "End the round"
+    function: game_end_round
+    return_type: ["null", "boolean"]
+    args:
+      id: string
+
+  new_round:
+    doc: "Start the new round"
+    function: game_new_round
+    return_type: ["null", "boolean"]
+    args:
+      id: string
+
+  new_game:
+    doc: "Start a new game"
+    function: game_new
+    return_type: "Game"
+    args:
+      participant_ids: {"type": "array", "items": "string"}

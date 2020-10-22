@@ -1,0 +1,81 @@
+{
+    "Profile": [
+        {
+            "id": "0A9E1090-E8F0-4337-966B-70CC9EBC6BB2",
+            "name": "John"
+        },
+        {
+            "id": "EC6E3750-A550-4F93-8346-C1C22906CD74",
+            "name": "Adam"
+        },
+        {
+            "id": "309F5D59-D7B5-4F7C-A769-F3B65160BA44",
+            "name": "Eve"
+        },
+        {
+            "id": "9ED00CB4-1868-47D6-BD72-4298204E0BA3",
+            "name": "Alice"
+        },
+        {
+            "id": "28985A35-DBAF-4FFB-9F3A-A74EC2C9ACF3",
+            "name": "Bob"
+        }
+    ],
+    "Game": [
+        {
+            "id": "78E91DAF-CAD1-4D6B-935F-C9E44A0D5DEB",
+            "participant_ids": [
+                "EC6E3750-A550-4F93-8346-C1C22906CD74",
+                "309F5D59-D7B5-4F7C-A769-F3B65160BA44",
+                "9ED00CB4-1868-47D6-BD72-4298204E0BA3",
+                "28985A35-DBAF-4FFB-9F3A-A74EC2C9ACF3"
+            ],
+            "mafia_ids": ["309F5D59-D7B5-4F7C-A769-F3B65160BA44"],
+            "doctor_ids": ["9ED00CB4-1868-47D6-BD72-4298204E0BA3"],
+            "complete": false
+        }
+    ],
+    "Round": [
+        {
+            "game_id": "78E91DAF-CAD1-4D6B-935F-C9E44A0D5DEB",
+            "id": 1,
+            "round_type": "Night",
+            "alive_ids": [
+                "309F5D59-D7B5-4F7C-A769-F3B65160BA44",
+                "9ED00CB4-1868-47D6-BD72-4298204E0BA3",
+                "28985A35-DBAF-4FFB-9F3A-A74EC2C9ACF3"
+            ],
+            "complete": true
+        },
+        {
+            "game_id": "78E91DAF-CAD1-4D6B-935F-C9E44A0D5DEB",
+            "id": 2,
+            "round_type": "Day",
+            "alive_ids": null,
+            "complete": false
+        }
+    ],
+    "Vote": [
+        {
+            "game_id": "78E91DAF-CAD1-4D6B-935F-C9E44A0D5DEB",
+            "round_id": 2,
+            "user_id": "309F5D59-D7B5-4F7C-A769-F3B65160BA44",
+            "action": "Kill",
+            "target_id": "9ED00CB4-1868-47D6-BD72-4298204E0BA3"
+        },
+        {
+            "game_id": "78E91DAF-CAD1-4D6B-935F-C9E44A0D5DEB",
+            "round_id": 2,
+            "user_id": "9ED00CB4-1868-47D6-BD72-4298204E0BA3",
+            "action": "Kill",
+            "target_id": "309F5D59-D7B5-4F7C-A769-F3B65160BA44"
+        },
+        {
+            "game_id": "78E91DAF-CAD1-4D6B-935F-C9E44A0D5DEB",
+            "round_id": 2,
+            "user_id": "28985A35-DBAF-4FFB-9F3A-A74EC2C9ACF3",
+            "action": "Kill",
+            "target_id": "9ED00CB4-1868-47D6-BD72-4298204E0BA3"
+        }
+    ]
+}
