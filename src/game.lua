@@ -364,7 +364,7 @@ local function new_game(participant_ids)
     })
     if err ~= nil then return nil, err end
 
-    return res[1]
+    return res[1].id
 end
 
 local function vote(game_id, target, action)

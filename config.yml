@@ -11,14 +11,6 @@ services:
       id: long
 
 
-  calculate_round:
-    doc: "Calculate the result of the round"
-    function: game_calculate_round
-    return_type: ["null", {"type": "array", "items": "string"}]
-    args:
-      id: string
-
-
   end_round:
     doc: "End the round"
     function: game_end_round
@@ -36,6 +28,6 @@ services:
   new_game:
     doc: "Start a new game"
     function: game_new
-    return_type: "Game"
+    return_type: "string"
     args:
       participant_ids: {"type": "array", "items": "string"}
