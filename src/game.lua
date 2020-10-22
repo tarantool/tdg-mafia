@@ -38,7 +38,6 @@ end
 
 local function get_participants(game) return get_profiles(game.participant_ids) end
 local function get_mafia(game) return get_profiles(game.mafia_ids) end
-local function get_doctors(game) return get_profiles(game.doctor_ids) end
 
 local function get_rounds(game_id)
     local rounds = {}
@@ -204,9 +203,7 @@ local function calculate_round(game_id, round_id)
     end
 
     for _, vote in ipairs(votes) do
-        if vote.action == 'Kill' then
-            alive[vote.target_id] = alive[vote.target_id] + 1
-        end
+        alive[vote.target_id] = alive[vote.target_id] + 1
     end
 
     local killed = nil
@@ -221,17 +218,10 @@ local function calculate_round(game_id, round_id)
         return nil
     end
 
-    local healed = {}
-    for _, vote in ipairs(votes) do
-        if vote.action == 'Heal' then
-            healed[id] = true
-        end
-    end
-
     local result = {}
 
     for _, id in ipairs(last_round.alive_ids) do
-        if id ~= killed or healed[id] == true then
+        if id ~= killed then
             table.insert(result, id)
         end
     end
@@ -361,16 +351,15 @@ local function random_shuffle(list)
 end
 
 local function new_game(participant_ids)
-    if #participant_ids < 4 then
-        return nil, "Need at least 4 players"
+    if #participant_ids < 5 then
+        return nil, "Need at least 5 players"
     end
 
     random_shuffle(participant_ids)
 
     local res, err = repository.put('Game', {
          participant_ids = participant_ids,
-         mafia_ids = {participant_ids[1]},
-         doctor_ids = {participant_ids[2]},
+         mafia_ids = {participant_ids[1], participant_ids[2]},
          complete = false
     })
     if err ~= nil then return nil, err end
@@ -389,7 +378,6 @@ end
 return {
     get_participants = get_participants,
     get_mafia = get_mafia,
-    get_doctors = get_doctors,
     get_alive = get_alive,
     round_get_alive = round_get_alive,
     calculate_round = calculate_round,

@@ -31,7 +31,6 @@
                 "28985A35-DBAF-4FFB-9F3A-A74EC2C9ACF3"
             ],
             "mafia_ids": ["309F5D59-D7B5-4F7C-A769-F3B65160BA44"],
-            "doctor_ids": ["9ED00CB4-1868-47D6-BD72-4298204E0BA3"],
             "complete": false
         }
     ],
@@ -60,21 +59,18 @@
             "game_id": "78E91DAF-CAD1-4D6B-935F-C9E44A0D5DEB",
             "round_id": 2,
             "user_id": "309F5D59-D7B5-4F7C-A769-F3B65160BA44",
-            "action": "Kill",
             "target_id": "9ED00CB4-1868-47D6-BD72-4298204E0BA3"
         },
         {
             "game_id": "78E91DAF-CAD1-4D6B-935F-C9E44A0D5DEB",
             "round_id": 2,
             "user_id": "9ED00CB4-1868-47D6-BD72-4298204E0BA3",
-            "action": "Kill",
             "target_id": "309F5D59-D7B5-4F7C-A769-F3B65160BA44"
         },
         {
             "game_id": "78E91DAF-CAD1-4D6B-935F-C9E44A0D5DEB",
             "round_id": 2,
             "user_id": "28985A35-DBAF-4FFB-9F3A-A74EC2C9ACF3",
-            "action": "Kill",
             "target_id": "9ED00CB4-1868-47D6-BD72-4298204E0BA3"
         }
     ]

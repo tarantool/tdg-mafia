@@ -24,7 +24,6 @@
             {"name": "id", "type": "string", "default_function":"uuid4"},
             {"name": "participant_ids", "type": {"type": "array", "items": "string"}},
             {"name": "mafia_ids", "type": {"type": "array", "items": "string"}},
-            {"name": "doctor_ids", "type": {"type": "array", "items": "string"}},
             {"name": "complete", "type": "boolean", "default": false},
             {"name": "who_won", "type": ["null", "WhoWon"]}
         ],
@@ -83,11 +82,6 @@
         ]
     },
     {
-        "type": "enum",
-        "name": "VoteType",
-        "symbols": ["Kill", "Heal"]
-    },
-    {
         "name": "Vote",
         "type": "record",
         "doc": "Vote within a round",
@@ -95,8 +89,7 @@
             {"name": "game_id", "type": "string"},
             {"name": "round_id", "type": "long"},
             {"name": "user_id", "type": "string"},
-            {"name": "target_id", "type": "string"},
-            {"name": "action", "type": "VoteType"}
+            {"name": "target_id", "type": "string"}
         ],
         "indexes": [{"name": "primary", "parts": ["game_id", "round_id", "user_id"]}],
         "affinity": ["game_id"],
