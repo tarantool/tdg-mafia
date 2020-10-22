@@ -31,3 +31,17 @@ services:
     return_type: "string"
     args:
       participant_ids: {"type": "array", "items": "string"}
+
+  get_phase:
+    doc: "Get game phase"
+    function: game_phase
+    return_type: "string"
+    args:
+      id: "string"
+
+  vote:
+    doc: "Make a vote"
+    function: game_phase
+    return_type: "string"
+    args:
+      id: "string"

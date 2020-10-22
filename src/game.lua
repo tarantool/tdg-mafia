@@ -140,6 +140,22 @@ local function get_alive(game_id)
     return res
 end
 
+local function get_phase(game_id)
+    log.error(game_id)
+    local game, err = repository.get('Game', 'id', game_id)
+    if err ~= nil then return nil, err end
+
+    local round, err = get_current_round(game_id)
+    if err ~= nil then return nil, err end
+
+    if round == nil then
+        return nil
+    end
+
+    return round.round_type
+end
+
+
 local function round_get_alive(round)
     local res = {}
 
@@ -319,7 +335,7 @@ local function new_round(game_id)
                                             complete = false
         })
         if err ~= nil then return nil, err end
-
+        return res
     end
 
     if round.complete ~= true then
@@ -357,19 +373,24 @@ local function new_game(participant_ids)
 
     random_shuffle(participant_ids)
 
-    local res, err = repository.put('Game', {
+    local game, err = repository.put('Game', {
          participant_ids = participant_ids,
          mafia_ids = {participant_ids[1], participant_ids[2]},
          complete = false
     })
     if err ~= nil then return nil, err end
 
-    return res[1].id
+    local round, err = new_round(game[1].id)
+
+    if err~=nil then return nil, err end
+
+    return game[1].id
 end
 
 local function vote(game_id, target, action)
     local vote, err = repository.get('Vote', 'primary', id)
     if err ~= nil then return nil, err end
+
 
 
 end
@@ -379,6 +400,7 @@ return {
     get_participants = get_participants,
     get_mafia = get_mafia,
     get_alive = get_alive,
+    get_phase = get_phase,
     round_get_alive = round_get_alive,
     calculate_round = calculate_round,
     end_round = end_round,

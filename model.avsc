@@ -46,6 +46,13 @@
                 "arguments": [
                 ],
                 "ref": "game_mafia"
+            },
+            {
+                "name": "phase",
+                "type": "string",
+                "arguments": [
+                ],
+                "ref": "game_phase"
             }
         ]
     },
